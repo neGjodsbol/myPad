@@ -1,4 +1,5 @@
 #include "mpkeyboard.h"
+#include "shortcut.h"
 #include "ui_mpkeyboard.h"
 
 MpKeyboard::MpKeyboard(QWidget *parent) :
@@ -291,7 +292,8 @@ void MpKeyboard::functionKey(int key)
             break;
         case KEY_DEL: emit keyAction("delete-measures");
             break;
-        case KEY_TUPLET: emit keyAction("gui", "tuplet-menu");
+        case KEY_TUPLET: emit keyAction("tuplets-menu");
+//            getAction("tuplets-menu")->trigger();
             break;
         default:
             break;
@@ -319,7 +321,6 @@ void MpKeyboard::functionKey(int key)
 void MpKeyboard::setFlat(int key, bool on)
 {
     switch (key) {
-    case KEY_NOTE: ui->noteEntry->setChecked(on); break;
     case KEY_SHIFT: ui->keyShift->setChecked(on);break;
     case KEY_CMD: ui->keyCmd->setChecked(on); break;
     case KEY_128: {ui->key128->setFlat(on);} break;
@@ -335,13 +336,6 @@ void MpKeyboard::setFlat(int key, bool on)
         break;
     }
 }
-
-/*
- * void MpKeyboard::sendKey(int modifier, int key)
-{
-
-}
-*/
 
 // -----------------------------
 // Keyboard events
@@ -511,4 +505,21 @@ void MpKeyboard::on_keyUp_clicked()
 void MpKeyboard::on_keyRight_clicked()
 {
     specialKey(KEY_RIGHT);
+}
+void MpKeyboard::on_voiceButton_clicked()
+      {
+      emit keyAction ("toggle-voices");
+//      getAction("toggle-voices")->trigger();
+      }
+
+void MpKeyboard::setVoice (int voice)
+{
+if (voice == 1)
+     ui->voiceButton->setText("1");
+else if (voice == 2)
+      ui->voiceButton->setText("2");
+else if (voice == 3)
+      ui->voiceButton->setText("3");
+else if (voice == 4)
+      ui->voiceButton->setText("4");
 }

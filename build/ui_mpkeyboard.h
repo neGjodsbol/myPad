@@ -44,7 +44,7 @@ public:
     QPushButton *key64;
     QPushButton *key32;
     QPushButton *keyShift;
-    QPushButton *noteEntry;
+    QPushButton *voiceButton;
     QPushButton *key128;
     QPushButton *keyDel;
     QPushButton *keyTie;
@@ -68,7 +68,7 @@ public:
         MpKeyboard->setMaximumSize(QSize(300, 95));
         gridLayoutWidget = new QWidget(MpKeyboard);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(10, 0, 281, 91));
+        gridLayoutWidget->setGeometry(QRect(0, 0, 291, 91));
         softKeyLayout = new QGridLayout(gridLayoutWidget);
         softKeyLayout->setSpacing(6);
         softKeyLayout->setContentsMargins(11, 11, 11, 11);
@@ -171,11 +171,11 @@ public:
 
         softKeyLayout->addWidget(keyShift, 2, 0, 1, 1);
 
-        noteEntry = new QPushButton(gridLayoutWidget);
-        noteEntry->setObjectName(QStringLiteral("noteEntry"));
-        noteEntry->setCheckable(true);
+        voiceButton = new QPushButton(gridLayoutWidget);
+        voiceButton->setObjectName(QStringLiteral("voiceButton"));
+        voiceButton->setCheckable(true);
 
-        softKeyLayout->addWidget(noteEntry, 1, 0, 1, 1);
+        softKeyLayout->addWidget(voiceButton, 1, 0, 1, 1);
 
         key128 = new QPushButton(gridLayoutWidget);
         key128->setObjectName(QStringLiteral("key128"));
@@ -270,7 +270,7 @@ public:
         key64->setText(QApplication::translate("MpKeyboard", "2", Q_NULLPTR));
         key32->setText(QApplication::translate("MpKeyboard", "3", Q_NULLPTR));
         keyShift->setText(QApplication::translate("MpKeyboard", "S", Q_NULLPTR));
-        noteEntry->setText(QApplication::translate("MpKeyboard", "N", Q_NULLPTR));
+        voiceButton->setText(QApplication::translate("MpKeyboard", "1", Q_NULLPTR));
         key128->setText(QApplication::translate("MpKeyboard", "1", Q_NULLPTR));
         keyDel->setText(QApplication::translate("MpKeyboard", "D", Q_NULLPTR));
         keyTie->setText(QApplication::translate("MpKeyboard", "+", Q_NULLPTR));

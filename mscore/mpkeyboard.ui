@@ -28,9 +28,9 @@
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>0</x>
      <y>0</y>
-     <width>281</width>
+     <width>291</width>
      <height>91</height>
     </rect>
    </property>
@@ -175,9 +175,9 @@
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QPushButton" name="noteEntry">
+     <widget class="QPushButton" name="voiceButton">
       <property name="text">
-       <string>N</string>
+       <string>1</string>
       </property>
       <property name="checkable">
        <bool>true</bool>

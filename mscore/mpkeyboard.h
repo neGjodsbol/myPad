@@ -1,6 +1,7 @@
 #ifndef MPKEYBOARD_H
 #define MPKEYBOARD_H
 
+#include "shortcut.h"
 #include <QWidget>
 
 namespace Ui {
@@ -14,6 +15,9 @@ class MpKeyboard : public QWidget
 public:
     explicit MpKeyboard(QWidget *parent = 0);
     ~MpKeyboard();
+
+public slots:
+         void setVoice(int);
 
 private slots:
 
@@ -83,11 +87,13 @@ private slots:
 
     void on_keyRight_clicked();
 
+    void on_voiceButton_clicked();
+
 signals:
-    keyAction (QAction *);
-    keyAction (const char *);
-    keyAction (int, int);
-    keyAction (QString, QString);
+    void keyAction (QAction *);
+    void keyAction (const char *);
+    void keyAction (int, int);
+    void keyAction (QString, QString);
 
 private:
     Ui::MpKeyboard *ui;
