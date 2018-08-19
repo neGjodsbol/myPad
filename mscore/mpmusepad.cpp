@@ -27,8 +27,10 @@ MusePad::~MusePad()
 
 void MusePad::mpInit ()
 {
-    env = new Ui::MpSizing (this);
     this->setIconSize(QSize(19,19));
+
+    baseSize = new MpScreen (50, 50, 290, 460);
+    setSize (this, baseSize);
 
     setCentralWidget(ui->scoreEdit);
     shortcut = new Ms::Shortcut ();
@@ -45,12 +47,15 @@ void MusePad::mpInit ()
     mpKeyboard = new MpKeyboard (mpKeyboardPanel);
     mpKeyboardPanel->setWidget(mpKeyboard);
     addDockWidget(Qt::BottomDockWidgetArea, mpKeyboardPanel);
+    connect (mpKeyboard, SIGNAL (keyAction(const char *)), SLOT (mpCmd(const char *)));
+
+    settings = new MpSettings (this);
+    settings->setVisible (true);
+    connect (settings, SIGNAL (setBaseSize (QRect *)), SLOT (setBaseSize (QRect *)));
 
     mpVoiceBox = new MpVoices (this);
     mpVoiceBox->setVisible(false);
-
     connect (mpVoiceBox, SIGNAL(voiceChanged(int)),mpKeyboard,SLOT(setVoice(int)));
-    connect (mpKeyboard, SIGNAL (keyAction(const char *)), SLOT (mpCmd(const char *)));
 
 // Set Tablet defaults
 
@@ -65,51 +70,6 @@ void MusePad::mpInit ()
       palettePanel->setWidget(paletteBox);
       addDockWidget(Qt::LeftDockWidgetArea, palettePanel);
       palettePanel->setVisible(false);
-/*
-
-    mpPlayTools->setVisible(false);
-
-
-    currentPalette = "";
-    connect (this, SIGNAL (mpSetPalette (QAction *)),paletteBox, SLOT (mpSetPalette (QAction *)));
-
-    voicePanel = new QDockWidget ("Voices",this);
-    voicePanel->setAllowedAreas(Qt::RightDockWidgetArea);
-    voices = new MpVoices (voicePanel);
-    voicePanel->setWidget(voices);
-    addDockWidget(Qt::RightDockWidgetArea, voicePanel);
-    voicePanel->setVisible(false);
-    m_voiceSet = 1;
-    mpSetVoiceIcon(m_voiceSet);
-    connect(voices, SIGNAL (voiceChanged (int)), SLOT (mpSetVoiceIcon(int)));
-    scorePanel = new QDockWidget ("Score",this);
-    scorePanel->setAllowedAreas(Qt::RightDockWidgetArea);
-    score = new MpScoreSettings (scorePanel);
-    scorePanel->setWidget(score);
-    addDockWidget(Qt::RightDockWidgetArea, scorePanel);
-    scorePanel->setVisible(false);
-    settingsPanel = new QDockWidget ("Settings",this);
-    settingsPanel->setAllowedAreas(Qt::LeftDockWidgetArea);
-    settings= new MpSettings (settingsPanel);
-    settingsPanel->setWidget(settings);
-    addDockWidget(Qt::LeftDockWidgetArea, settingsPanel);
-    settingsPanel->setVisible(false);
-
-    connect (settings, SIGNAL (mpGuiAction(QString, QString)), SLOT (mpCmd(QString, QString)));
-    connect (settings, SIGNAL (mpAction(const char *)), SLOT (mpCmd(const char *)));
-    connect (settings, SIGNAL (mpLayoutMode(int)), SLOT (switchLayoutMode(int)));
-
-    keyboardPanel = new QDockWidget (this);
-    keyboardPanel->setAllowedAreas(Qt::BottomDockWidgetArea);
-    key = new MpKeyboard (keyboardPanel);
-    keyboardPanel->setWidget(key);
-    addDockWidget(Qt::BottomDockWidgetArea, keyboardPanel);
-    keyboardPanel->setVisible(true);
-    connect (key, SIGNAL (keyAction(QAction *)), SLOT(cmd(QAction *)));
-    connect (key, SIGNAL (keyAction(const char *)), SLOT (mpCmd(const char *)));
-    connect (key, SIGNAL (keyAction(QString, QString)), SLOT (mpCmd(QString, QString)));
-
-*/
 }
 
 // ----------------------------------------------------
@@ -242,8 +202,8 @@ void MusePad::mpPrepareToolbars ()
     paletteTwoTools->setVisible(false);
     paletteTwoTools->setMovable(false);
 
-    connect (paletteOneTools, SIGNAL(triggerd(QAction*)),SLOT(mpCmd(QAction*)));
-    connect (paletteTwoTools, SIGNAL(triggerd(QAction*)),SLOT(mpCmd(QAction*)));
+    connect (paletteOneTools, SIGNAL(triggered(QAction*)),SLOT(mpCmd(QAction*)));
+    connect (paletteTwoTools, SIGNAL(triggered(QAction*)),SLOT(mpCmd(QAction*)));
 
 //  ---------------------------------------------
 //  Pop-up menus
@@ -347,7 +307,7 @@ void MusePad::mpPrepareToolbars ()
     connect(mpScoreMenu,SIGNAL(triggered (QAction*)),SLOT (mpCmd(QAction*)));
 }
 
-
+/*
 void MusePad::mpSetVoiceIcon(int voice)
 {
     static QString vtxt[4];
@@ -355,7 +315,7 @@ void MusePad::mpSetVoiceIcon(int voice)
 
     m_voiceSet = voice;
 }
-
+*/
 int MusePad::getVoice ()
 {
     return m_voiceSet;
@@ -408,6 +368,7 @@ void MusePad::mpCmd (const char *cmdn)
 #ifndef TABGUI
     getAction(cmdn)->trigger();
 #else
+    getAction(cmdn)->trigger();
     cmd(getAction(cmdn));
 #endif
 }
@@ -444,15 +405,23 @@ void MusePad::mpCmd (QAction *a)
           p.setY(p.y()+75);
           mpTupletsMenu->popup(QPoint (p));
           }
+    else if (cmdn == "settings-dialog")
+          {
+          if (!settings)
+              settings = new MpSettings (this);
+          settings->setVisible(true);
+          }
     else if (cmdn == "toggle-voices")
-        {
-            if (mpVoiceBox->isVisible()) {
-            mpVoiceBox->setVisible(false);
+          {
+            if (mpVoiceBox->isVisible())
+                {
+                mpVoiceBox->setVisible(false);
                 }
-            else {
-            mpVoiceBox->setVisible(true);
-            }
-        }
+            else
+                {
+                mpVoiceBox->setVisible(true);
+                }
+          }
     else if (cmdn == "toggle-playback")
           {
           if (getAction("toggle-playback")->isChecked())
@@ -513,6 +482,27 @@ void MusePad::cmd (QAction *a)
         cmdn = a->text();
     ui->scoreEdit->setText(cmdn);
 }
+void MusePad::setBaseSize(QRect *r)
+    {
+    if(!baseSize)
+        baseSize = new MpScreen(r);
+    else
+        {
+        baseSize->setX(r->x());
+        baseSize->setY(r->y());
+        baseSize->setWidth(r->width());
+        baseSize->setHeight(r->height());
+        }
+    setSize (this, baseSize);
+    }
+
+void MusePad::setSize (QWidget* w, MpScreen* baseSize)
+    {
+    w->move(baseSize->x(),baseSize->y());
+    w->setMinimumSize(baseSize->width(),baseSize->height());
+    w->setMaximumSize(baseSize->width(),baseSize->height());
+    }
+
 void MusePad::mpShowPalette(QAction* a)
       {
       QString s = a->data().toString();

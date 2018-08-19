@@ -2,7 +2,6 @@ INPUT(
 ./release\main.o
 ./release\mptoolbutton.o
 ./release\mpvoices.o
-./release\mpsizing.o
 ./release\mpkeyboard.o
 ./release\mpmusepad.o
 ./release\palette.o
@@ -11,6 +10,8 @@ INPUT(
 ./release\shortcut.o
 ./release\icons.o
 ./release\toolbuttonmenu.o
+./release\mpscreen.o
+./release\mpsettings.o
 ./release\qrc_myscore.o
 ./release\moc_mptoolbutton.o
 ./release\moc_mpvoices.o
@@ -19,4 +20,5 @@ INPUT(
 ./release\moc_palette.o
 ./release\moc_mppalettebox.o
 ./release\moc_toolbuttonmenu.o
+./release\moc_mpsettings.o
 );

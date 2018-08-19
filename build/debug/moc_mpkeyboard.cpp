@@ -208,7 +208,6 @@ void MpKeyboard::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 2: _t->keyAction((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 3: _t->keyAction((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
         case 4: _t->setVoice((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 5: _t->on_noteEntry_clicked(); break;
         case 6: _t->on_keyA_clicked(); break;
         case 7: _t->on_keyB_clicked(); break;
         case 8: _t->on_keyC_clicked(); break;

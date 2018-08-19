@@ -8,6 +8,7 @@ MpVoices::MpVoices(QWidget *parent) :
     ui->setupUi(this);
     resetButtons();
     setButtons(1);
+    this->setWindowFlag(Qt::FramelessWindowHint);
 }
 
 MpVoices::~MpVoices()

@@ -341,11 +341,6 @@ void MpKeyboard::setFlat(int key, bool on)
 // Keyboard events
 // -----------------------------
 
-void MpKeyboard::on_noteEntry_clicked()
-{
-        specialKey(KEY_NOTE);
-}
-
 void MpKeyboard::on_keyA_clicked()
 {
     pitchKey(KEY_A);
@@ -465,7 +460,6 @@ void MpKeyboard::on_keyTriplet_clicked()
 {
     functionKey(KEY_TUPLET);
 }
-
 
 void MpKeyboard::on_keyShift_clicked()
 {

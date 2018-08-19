@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MusePad_t {
-    QByteArrayData data[14];
-    char stringdata0[132];
+    QByteArrayData data[15];
+    char stringdata0[136];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,19 +36,20 @@ QT_MOC_LITERAL(1, 8, 5), // "mpCmd"
 QT_MOC_LITERAL(2, 14, 0), // ""
 QT_MOC_LITERAL(3, 15, 11), // "const char*"
 QT_MOC_LITERAL(4, 27, 8), // "QAction*"
-QT_MOC_LITERAL(5, 36, 3), // "cmd"
-QT_MOC_LITERAL(6, 40, 14), // "mpSetVoiceIcon"
-QT_MOC_LITERAL(7, 55, 12), // "helpBrowser1"
-QT_MOC_LITERAL(8, 68, 8), // "tutorial"
-QT_MOC_LITERAL(9, 77, 5), // "about"
-QT_MOC_LITERAL(10, 83, 7), // "aboutQt"
-QT_MOC_LITERAL(11, 91, 13), // "aboutMusicXML"
-QT_MOC_LITERAL(12, 105, 9), // "reportBug"
-QT_MOC_LITERAL(13, 115, 16) // "switchLayoutMode"
+QT_MOC_LITERAL(5, 36, 11), // "setBaseSize"
+QT_MOC_LITERAL(6, 48, 6), // "QRect*"
+QT_MOC_LITERAL(7, 55, 3), // "cmd"
+QT_MOC_LITERAL(8, 59, 12), // "helpBrowser1"
+QT_MOC_LITERAL(9, 72, 8), // "tutorial"
+QT_MOC_LITERAL(10, 81, 5), // "about"
+QT_MOC_LITERAL(11, 87, 7), // "aboutQt"
+QT_MOC_LITERAL(12, 95, 13), // "aboutMusicXML"
+QT_MOC_LITERAL(13, 109, 9), // "reportBug"
+QT_MOC_LITERAL(14, 119, 16) // "switchLayoutMode"
 
     },
     "MusePad\0mpCmd\0\0const char*\0QAction*\0"
-    "cmd\0mpSetVoiceIcon\0helpBrowser1\0"
+    "setBaseSize\0QRect*\0cmd\0helpBrowser1\0"
     "tutorial\0about\0aboutQt\0aboutMusicXML\0"
     "reportBug\0switchLayoutMode"
 };
@@ -72,21 +73,21 @@ static const uint qt_meta_data_MusePad[] = {
        1,    2,   77,    2, 0x08 /* Private */,
        1,    1,   82,    2, 0x08 /* Private */,
        5,    1,   85,    2, 0x08 /* Private */,
-       6,    1,   88,    2, 0x08 /* Private */,
-       7,    0,   91,    2, 0x08 /* Private */,
-       8,    0,   92,    2, 0x08 /* Private */,
-       9,    0,   93,    2, 0x08 /* Private */,
-      10,    0,   94,    2, 0x08 /* Private */,
-      11,    0,   95,    2, 0x08 /* Private */,
-      12,    0,   96,    2, 0x08 /* Private */,
-      13,    1,   97,    2, 0x08 /* Private */,
+       7,    1,   88,    2, 0x08 /* Private */,
+       8,    0,   91,    2, 0x08 /* Private */,
+       9,    0,   92,    2, 0x08 /* Private */,
+      10,    0,   93,    2, 0x08 /* Private */,
+      11,    0,   94,    2, 0x08 /* Private */,
+      12,    0,   95,    2, 0x08 /* Private */,
+      13,    0,   96,    2, 0x08 /* Private */,
+      14,    1,   97,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
     QMetaType::Void, QMetaType::QString, QMetaType::QString,    2,    2,
     QMetaType::Void, 0x80000000 | 4,    2,
+    QMetaType::Void, 0x80000000 | 6,    2,
     QMetaType::Void, 0x80000000 | 4,    2,
-    QMetaType::Void, QMetaType::Int,    2,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -107,8 +108,8 @@ void MusePad::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 0: _t->mpCmd((*reinterpret_cast< const char*(*)>(_a[1]))); break;
         case 1: _t->mpCmd((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
         case 2: _t->mpCmd((*reinterpret_cast< QAction*(*)>(_a[1]))); break;
-        case 3: _t->cmd((*reinterpret_cast< QAction*(*)>(_a[1]))); break;
-        case 4: _t->mpSetVoiceIcon((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->setBaseSize((*reinterpret_cast< QRect*(*)>(_a[1]))); break;
+        case 4: _t->cmd((*reinterpret_cast< QAction*(*)>(_a[1]))); break;
         case 5: _t->helpBrowser1(); break;
         case 6: _t->tutorial(); break;
         case 7: _t->about(); break;
@@ -128,7 +129,7 @@ void MusePad::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QAction* >(); break;
             }
             break;
-        case 3:
+        case 4:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:

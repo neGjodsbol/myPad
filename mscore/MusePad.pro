@@ -27,7 +27,6 @@ SOURCES += \
     main.cpp \
     mptoolbutton.cpp \
     mpvoices.cpp \
-    mpsizing.cpp \
     mpkeyboard.cpp \
     mpmusepad.cpp \
     palette.cpp \
@@ -35,13 +34,14 @@ SOURCES += \
     ..\libmscore\musescorecore.cpp \
     shortcut.cpp \
     icons.cpp \
-    toolbuttonmenu.cpp
+    toolbuttonmenu.cpp \
+    mpscreen.cpp \
+    mpsettings.cpp
 
 
 HEADERS += \
     mptoolbutton.h \
     mpvoices.h \
-    mpsizing.h \
     mpkeyboard.h \
     mptablet.h \
     mpmusepad.h \
@@ -53,13 +53,16 @@ HEADERS += \
     icons.h \
     globals.h \
     preferences.h \
-    toolbuttonmenu.h
+    toolbuttonmenu.h \
+    mpscreen.h \
+    mpsettings.h
 
 FORMS += \
     mpvoices.ui \
     mpkeyboard.ui \
     mpmusepad.ui \
-    mppalettebox.ui
+    mppalettebox.ui \
+    mpsettings.ui
 
 RESOURCES += \
     myscore.qrc

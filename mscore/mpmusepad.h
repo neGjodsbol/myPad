@@ -3,12 +3,14 @@
 
 #include <QMainWindow>
 #include <QtWidgets>
+#include <QRect>
 #include <string>
-#include "mpsizing.h"
 #include "mpkeyboard.h"
 #include "mpvoices.h"
+#include "mpscreen.h"
 #include "mptoolbutton.h"
 #include "mppalettebox.h"
+#include "mpsettings.h"
 #include "toolbuttonmenu.h"
 #include "shortcut.h"
 #include "globals.h"
@@ -41,12 +43,9 @@ private slots:
     void mpCmd (const char *);
     void mpCmd (QString, QString);
     void mpCmd (QAction *);
-//    void mpShowPalette (QAction *);
+    void setBaseSize (QRect *);
 
     void cmd (QAction *);
-
-    void mpSetVoiceIcon(int);
-
     void helpBrowser1() const;
     void tutorial () const;
     void about();
@@ -56,17 +55,15 @@ private slots:
     void switchLayoutMode (int);
 
 signals:
-//    QAction mpAction (QAction *);
-//    QAction mpSetPalette (QAction *, bool);
 
 private:
     Ui::MusePad *ui;
-    Ui::MpSizing *env;
+    MpScreen *baseSize;
     Ms::Shortcut *shortcut;
     MpKeyboard *mpKeyboard;
-    MpVoices *voices;
     MpVoices *mpVoiceBox;
     MpPaletteBox *paletteBox;
+    MpSettings *settings;
 
     QDockWidget *mpKeyboardPanel;
     QDockWidget *palettePanel;
@@ -98,6 +95,7 @@ private:
     QAction* mpGetAction (const char* id);
     int  getVoice ();
     void showMessage(const QString& s, int timeout);
+    void setSize (QWidget*, MpScreen*);
 
     QComboBox *viewModeCombo;
 
